@@ -13,7 +13,7 @@ go get -u github.com/jozsefsallai/go-derpi
 **Instantiate a client:**
 
 ```go
-package main
+package derpi
 
 import (
   "fmt"

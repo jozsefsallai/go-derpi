@@ -1,4 +1,4 @@
-package main
+package derpi
 
 // RepresentationsObject is an object that contains the various URLs for
 // different representations of an object.
