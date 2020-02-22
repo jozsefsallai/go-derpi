@@ -38,7 +38,7 @@ func main() {
 
 ## Documentation
 
-WIP.
+https://godoc.org/github.com/jozsefsallai/go-derpi
 
 ## License
 

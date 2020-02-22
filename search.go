@@ -9,6 +9,7 @@ import (
 // Derpibooru API
 type SearchClient struct {
 	Client        Client
+	FilterID      int
 	Key           string
 	Page          int
 	PerPage       int
@@ -19,6 +20,7 @@ type SearchClient struct {
 // SearchInitOpts is a structure that contains the options that can be
 // used to initialize the SearchClient instance
 type SearchInitOpts struct {
+	FilterID      int
 	Key           string
 	PerPage       int
 	SortDirection string
@@ -30,6 +32,10 @@ func (c Client) Search(opts SearchInitOpts) SearchClient {
 	var searchClient SearchClient
 	searchClient.Client = c
 	searchClient.PerPage = 25
+
+	if opts.FilterID > 0 {
+		searchClient.FilterID = opts.FilterID
+	}
 
 	if len(c.Key) > 0 {
 		searchClient.Key = c.Key
@@ -58,6 +64,10 @@ func (c Client) Search(opts SearchInitOpts) SearchClient {
 // query parameters that were set up when calling client.Search()
 func (sc SearchClient) QueryParams() url.Values {
 	params := url.Values{}
+
+	if sc.FilterID > 0 {
+		params.Add("filter_id", strconv.Itoa(sc.FilterID))
+	}
 
 	if sc.PerPage > 1 && sc.PerPage != 25 {
 		params.Add("per_page", strconv.Itoa(sc.PerPage))
